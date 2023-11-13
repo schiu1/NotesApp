@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
     <link rel="stylesheet" href="notesApp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="note" id="guide">
-        <div></div>
-        <textarea class="noteText" id="noteText" style="background-color: beige;"></textarea>
-    </div> 
+    <h1 id="heading">Some Notes</h1>
+    <i class="fa fa-plus" id="plus-icon" aria-hidden="true" onclick="alert('plus');"></i>
+    <div class="note" id="note1">
+        <i class="fa fa-trash" id="trash-icon" aria-hidden="true" onclick="alert('trash2');"></i>
+        <textarea class="noteText" id="noteText">
+            Intro Text.
+        </textarea>
+    </div>
+    <div class="note" id="note2">
+        <i class="fa fa-trash" id="trash-icon" aria-hidden="true" onclick="alert('trash2');"></i>
+        <textarea class="noteText" id="noteText"></textarea>
+    </div>
 </body>
 </html>
