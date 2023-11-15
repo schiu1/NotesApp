@@ -28,15 +28,17 @@
 }
 
 #plus-icon{
-    color: gray;
-    position: relative;
+    color: lightgreen;
+    position: absolute;
     font-size: 30px;
     cursor: pointer;
+    left: 64%;
+    top: 28px;
 }
 
 #heading{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     position: relative; 
-    left: 50%; 
-    transform: translateX(-50%);
+    left: 36%;
+    font-family: 'Source Sans Pro', sans-serif;
 }
