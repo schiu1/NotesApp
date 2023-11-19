@@ -4,7 +4,7 @@ plus.addEventListener("click", AddNote);
 function AddNote(){
     //add new note with unique id, which will append to end
     const allNotes = document.getElementsByClassName("note");
-    const original = document.getElementById("note2"); //change this to be more general
+    const original = document.getElementById("note" + allNotes.length); //change this to be more general
     let clone = original.cloneNode(true);
     clone.id = "note" + (allNotes.length + 1);
     document.body.appendChild(clone);
