@@ -2,16 +2,20 @@ const plus = document.getElementById("plus-icon");
 plus.addEventListener("click", AddNote);
 
 function AddNote(){
-    const original = document.getElementById("note2"); //change this to be more general
+    //add new note with unique id, which will append to end
     const allNotes = document.getElementsByClassName("note");
+    const original = document.getElementById("note2"); //change this to be more general
     let clone = original.cloneNode(true);
     clone.id = "note" + (allNotes.length + 1);
     document.body.appendChild(clone);
-    for(let i = 0; i < allNotes.length; i++){
-        console.log(allNotes[i]);
-        document.body.appendChild(allNotes[i]);
-        //supposed to get note1 and note2 and append them to the end of note3, pushing the newest created note to the top
-    }
     
+    //append all other notes behind newest created, pushing it to top
+    //do the same with updating a note but add if statemnt to check if same name as updated note
+    //if it is, continue
+    let counter = 0;
+    while(counter < allNotes.length - 1){
+        document.body.appendChild(allNotes[0]);
+        counter += 1;
+    }
     
 }
