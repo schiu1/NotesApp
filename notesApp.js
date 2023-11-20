@@ -22,5 +22,5 @@ function AddNote(){
         document.body.appendChild(allNotes[0]);
         counter += 1;
     }
-    
+    //laptop test
 }
