@@ -4,18 +4,21 @@ plus.addEventListener("click", AddNote);
 function AddNote(){
     //add new note with unique id, which will append to end
     const allNotes = document.getElementsByClassName("note");
-    const original = document.getElementById("note" + allNotes.length); //change this to be more general
+    const original = document.getElementById("note" + allNotes.length);
     let clone = original.cloneNode(true);
     clone.id = "note" + (allNotes.length + 1);
     document.body.appendChild(clone);
+
+    //make changes for it to perform as intended
     const newNote = document.getElementById(clone.id);
     console.log("innerHTML: " + newNote.getElementsByTagName("textarea")[0].innerHTML);
     console.log("value: " + newNote.getElementsByTagName("textarea")[0].value);
-    //this doesn't work with creating new note after user types in the original note
-    //bc what user types in the original note doesn't show up in innerHTML to change
-    newNote.getElementsByTagName("textarea")[0].innerHTML = "";
-    newNote.getElementsByTagName("textarea")[0].value = "";
-    
+    const textarea = newNote.getElementsByTagName("textarea")[0];
+    textarea.innerHTML = "";
+    textarea.value = "";
+    const deleteIcon = newNote.getElementsByTagName("i")[0];
+    deleteIcon.onclick = DeleteNote(clone.id);
+
     //append all other notes behind newest created, pushing it to top
     //do the same with updating a note but add if statemnt to check if same name as updated note
     //if it is, continue
@@ -23,6 +26,9 @@ function AddNote(){
     while(counter < allNotes.length - 1){
         document.body.appendChild(allNotes[0]);
         counter += 1;
-    }
-    
+    }   
+}
+
+function DeleteNote(noteNum){
+    console.log("huh");
 }
