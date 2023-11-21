@@ -17,7 +17,7 @@ function AddNote(){
     textarea.innerHTML = "";
     textarea.value = "";
     const deleteIcon = newNote.getElementsByTagName("i")[0];
-    deleteIcon.onclick = DeleteNote(clone.id);
+    deleteIcon.onclick = function(){DeleteNote(clone.id)}; 
 
     //append all other notes behind newest created, pushing it to top
     //do the same with updating a note but add if statemnt to check if same name as updated note
@@ -30,5 +30,5 @@ function AddNote(){
 }
 
 function DeleteNote(noteNum){
-    console.log("huh");
+    console.log(noteNum);
 }
