@@ -31,4 +31,6 @@ function AddNote(){
 
 function DeleteNote(noteNum){
     console.log(noteNum);
+    const elem = document.getElementById(noteNum);
+    elem.remove();
 }
