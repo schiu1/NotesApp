@@ -1,13 +1,15 @@
 const plus = document.getElementById("plus-icon");
 plus.addEventListener("click", AddNote);
+let noteCount = 1;
 
 function AddNote(){
     //add new note with unique id, which will append to end
     const allNotes = document.getElementsByClassName("note");
-    const original = document.getElementById("note" + allNotes.length);
+    const original = allNotes[0];
     let clone = original.cloneNode(true);
-    clone.id = "note" + (allNotes.length + 1);
+    clone.id = "note" + (noteCount + 1);
     document.body.appendChild(clone);
+    noteCount++;
 
     //make changes for it to perform as intended
     const newNote = document.getElementById(clone.id);
