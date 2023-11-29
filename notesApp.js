@@ -3,11 +3,6 @@ plus.addEventListener("click", AddNote);
 let noteCount = 1;
 
 function AddNote(){
-    /*
-    const allNotes = document.getElementsByClassName("note");
-    const original = allNotes[0];
-    let clone = original.cloneNode(true);
-    */
     //create new note with unique id, which will append to end
     const trashIcon = document.createElement("i"); 
     trashIcon.classList.toggle("fa");
@@ -45,6 +40,8 @@ function AddNote(){
 }
 
 function DeleteNote(noteNum){
-    const elem = document.getElementById(noteNum);
-    elem.remove();
+    if(confirm("Do you wish to delete this note?") == true){
+        const elem = document.getElementById(noteNum);
+        elem.remove();
+    }
 }
