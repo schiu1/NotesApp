@@ -30,6 +30,14 @@
     cursor: pointer;
 }
 
+#trash-icon:hover{
+    text-shadow: 0 0 3px red;
+}
+
+#trash-icon:active{
+    color: brown;
+}
+
 #plus-icon{
     color: lightgreen;
     position: absolute;
@@ -37,6 +45,14 @@
     cursor: pointer;
     left: 64%;
     top: 28px;
+}
+
+#plus-icon:hover{
+    text-shadow: 0 0 3px green;
+}
+
+#plus-icon:active{
+    color: darkgreen;
 }
 
 #heading{
