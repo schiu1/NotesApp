@@ -1,5 +1,5 @@
-import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
-document.getElementById('noteText').innerHTML = marked.parse('# Marked in the browser\n\nRendered by **marked**.');
+//import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+//document.getElementById('noteText').innerHTML = marked.parse('# Marked in the browser\n\nRendered by **marked**.');
 const plus = document.getElementById("plus-icon");
 plus.addEventListener("click", AddNote);
 let noteCount = 1;
