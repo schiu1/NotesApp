@@ -2,9 +2,38 @@
 //document.getElementById('noteText').innerHTML = marked.parse('# Marked in the browser\n\nRendered by **marked**.');
 const plus = document.getElementById("plus-icon");
 plus.addEventListener("click", AddNote);
-let noteCount = 1;
+let noteCount = 0;
+if(localStorage.getItem("saved") == null){
+    noteCount = 1;
+    const trashIcon = document.createElement("i"); 
+    trashIcon.classList.toggle("fa");
+    trashIcon.classList.toggle("fa-trash");
+    trashIcon.id = "trash-icon";
+    trashIcon.setAttribute("aria-hidden", "true");
+
+    const textSpace = document.createElement("textarea");
+    textSpace.classList.toggle("noteText");
+    textSpace.id = "noteText";
+    textSpace.innerHTML = "Hello, welcome to the Notes App."
+    
+    const createdNote = document.createElement("div");
+    createdNote.classList.toggle("note");
+    createdNote.id = "note1";
+
+    createdNote.appendChild(trashIcon);
+    createdNote.appendChild(textSpace);
+    document.body.appendChild(createdNote);
+    console.log("new");
+}
+else{
+    noteCount = parseInt(localStorage.getItem("noteCount"));
+    console.log("old");
+}
 
 function AddNote(){
+    if(localStorage.getItem("saved") == null){
+        localStorage.setItem("saved", "true");
+    }
     //create new note with unique id, which will append to end
     const trashIcon = document.createElement("i"); 
     trashIcon.classList.toggle("fa");
@@ -19,11 +48,13 @@ function AddNote(){
     const createdNote = document.createElement("div");
     createdNote.classList.toggle("note");
     createdNote.id = "note" + (noteCount + 1);
+    console.log(createdNote.id);
 
     createdNote.appendChild(trashIcon);
     createdNote.appendChild(textSpace);
     document.body.appendChild(createdNote);
     noteCount++;
+    localStorage.setItem("noteCount", noteCount);
 
     //make changes for it to perform as intended
     const newNote = document.getElementById(createdNote.id);
@@ -42,6 +73,9 @@ function AddNote(){
 }
 
 function DeleteNote(noteNum){
+    if(localStorage.getItem("saved") == null){
+        localStorage.setItem("saved", "true");
+    }
     if(confirm("Do you wish to delete this note?") == true){
         const elem = document.getElementById(noteNum);
         elem.remove();
