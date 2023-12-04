@@ -23,10 +23,12 @@ if(localStorage.getItem("saved") == null){
     createdNote.appendChild(trashIcon);
     createdNote.appendChild(textSpace);
     document.body.appendChild(createdNote);
+
+    localStorage.setItem("noteOrder", "1");
     console.log("new");
 }
 else{
-    noteCount = parseInt(localStorage.getItem("noteCount"));
+    noteCount = parseInt(localStorage.noteCount);
     console.log("old");
 }
 
