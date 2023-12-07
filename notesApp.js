@@ -68,10 +68,20 @@ function AddNote(){
     //if it is, continue
     let counter = 0;
     const allNotes = document.getElementsByClassName("note");
-    while(counter < allNotes.length - 1){
-        document.body.appendChild(allNotes[0]);
+    while(counter < allNotes.length){
+        if(counter + 1 != allNotes.length){
+            document.body.appendChild(allNotes[0]);
+        }
         counter += 1;
-    }   
+    }
+
+    let noteOrder = "";
+    for(let element of allNotes){
+        noteOrder = noteOrder + element.id.slice(4) + ",";
+    } 
+    noteOrder = noteOrder.slice(0, -1);
+    console.log(noteOrder);
+    localStorage.setItem("noteOrder", noteOrder);
 }
 
 function DeleteNote(noteNum){
