@@ -50,7 +50,7 @@ function AddNote(){
     const createdNote = document.createElement("div");
     createdNote.classList.toggle("note");
     createdNote.id = "note" + (noteCount + 1);
-    console.log(createdNote.id);
+    console.log("added " + createdNote.id);
 
     createdNote.appendChild(trashIcon);
     createdNote.appendChild(textSpace);
@@ -80,7 +80,6 @@ function AddNote(){
         noteOrder = noteOrder + element.id.slice(4) + ",";
     } 
     noteOrder = noteOrder.slice(0, -1);
-    console.log(noteOrder);
     localStorage.setItem("noteOrder", noteOrder);
 }
 
@@ -91,5 +90,16 @@ function DeleteNote(noteNum){
     if(confirm("Do you wish to delete this note?") == true){
         const elem = document.getElementById(noteNum);
         elem.remove();
+        let order = localStorage.getItem("noteOrder");
+        if(order.indexOf(",") != -1){
+            let temp = order.split(",");
+            temp.splice(temp.indexOf(noteNum.slice(4)), 1);
+            order = temp.join(",");
+        }
+        else{
+            order = "";
+        }
+        localStorage.setItem("noteOrder", order);
+        console.log("deleted " + noteNum);
     }
 }
