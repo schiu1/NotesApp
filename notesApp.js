@@ -1,7 +1,7 @@
 //import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 //document.getElementById('noteText').innerHTML = marked.parse('# Marked in the browser\n\nRendered by **marked**.');
 const plus = document.getElementById("plus-icon");
-plus.addEventListener("click", AddNote);
+plus.addEventListener("click", function(){ AddNote(); });
 let noteCount = 0;
 if(localStorage.getItem("saved") == null){
     noteCount = 1;
@@ -27,12 +27,22 @@ if(localStorage.getItem("saved") == null){
     localStorage.setItem("noteOrder", "1");
     console.log("new");
 }
-else{
+else if(localStorage.getItem("saved") != null){
     noteCount = parseInt(localStorage.noteCount);
+    const currentOrder = localStorage.getItem("noteOrder");
+    if(currentOrder != ""){
+        const orderArray = currentOrder.split(",");
+        for(let id of orderArray){
+            AddNote(id);
+        } 
+    }
+    else{
+        console.log("no existing notes to load from save");
+    }
     console.log("old");
 }
 
-function AddNote(){
+function AddNote(newId){
     if(localStorage.getItem("saved") == null){
         localStorage.setItem("saved", "true");
     }
@@ -49,14 +59,21 @@ function AddNote(){
     
     const createdNote = document.createElement("div");
     createdNote.classList.toggle("note");
-    createdNote.id = "note" + (noteCount + 1);
+    if(newId == undefined){
+        console.log("no arguement");
+        createdNote.id = "note" + (noteCount + 1);
+        noteCount++;
+        localStorage.setItem("noteCount", noteCount);
+    }
+    else if (newId != undefined){
+        console.log("with arguement");
+        createdNote.id = "note" + newId;
+    }
     console.log("added " + createdNote.id);
 
     createdNote.appendChild(trashIcon);
     createdNote.appendChild(textSpace);
     document.body.appendChild(createdNote);
-    noteCount++;
-    localStorage.setItem("noteCount", noteCount);
 
     //make changes for it to perform as intended
     const newNote = document.getElementById(createdNote.id);
@@ -66,13 +83,15 @@ function AddNote(){
     //append all other notes behind newest created, pushing it to top
     //do the same with updating a note but add if statemnt to check if same name as updated note
     //if it is, continue
-    let counter = 0;
     const allNotes = document.getElementsByClassName("note");
-    while(counter < allNotes.length){
-        if(counter + 1 != allNotes.length){
-            document.body.appendChild(allNotes[0]);
-        }
-        counter += 1;
+    if (newId == undefined) {
+        let counter = 0;
+        while(counter < allNotes.length){
+            if(counter + 1 != allNotes.length){
+                document.body.appendChild(allNotes[0]);
+            }
+            counter += 1;
+        }   
     }
 
     let noteOrder = "";
