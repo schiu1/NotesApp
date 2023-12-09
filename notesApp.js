@@ -25,7 +25,7 @@ if(localStorage.getItem("saved") == null){
     document.body.appendChild(createdNote);
 
     localStorage.setItem("noteOrder", "1");
-    console.log("new");
+    console.log("created new");
 }
 else if(localStorage.getItem("saved") != null){
     noteCount = parseInt(localStorage.noteCount);
@@ -39,7 +39,7 @@ else if(localStorage.getItem("saved") != null){
     else{
         console.log("no existing notes to load from save");
     }
-    console.log("old");
+    console.log("loaded old save");
 }
 
 function AddNote(newId){
@@ -60,13 +60,11 @@ function AddNote(newId){
     const createdNote = document.createElement("div");
     createdNote.classList.toggle("note");
     if(newId == undefined){
-        console.log("no arguement");
         createdNote.id = "note" + (noteCount + 1);
         noteCount++;
         localStorage.setItem("noteCount", noteCount);
     }
     else if (newId != undefined){
-        console.log("with arguement");
         createdNote.id = "note" + newId;
     }
     console.log("added " + createdNote.id);
