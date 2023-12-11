@@ -34,6 +34,12 @@ else if(localStorage.getItem("saved") != null){
         const orderArray = currentOrder.split(",");
         for(let id of orderArray){
             AddNote(id);
+            const savedText = localStorage.getItem("note" + id);
+            if(savedText != null){
+                const note = document.getElementById("note" + id);
+                note.getElementsByTagName("textarea")[0].innerHTML = savedText;
+            };
+            
         } 
     }
     else{
@@ -81,8 +87,8 @@ function AddNote(newId){
     textBox.onblur = function(){ UpdateNote(createdNote.id) }; 
 
     //append all other notes behind newest created, pushing it to top
-    //do the same with updating a note but add if statemnt to check if same name as updated note
-    //if it is, continue
+    //do the same with updating a note but add if statement to check if same name as updated note
+    //if it is, continue, so that it skips over it and doesn't move it's position
     const allNotes = document.getElementsByClassName("note");
     if (newId == undefined) {
         let counter = 0;
