@@ -76,7 +76,9 @@ function AddNote(newId){
     //make changes for it to perform as intended
     const newNote = document.getElementById(createdNote.id);
     const deleteIcon = newNote.getElementsByTagName("i")[0];
-    deleteIcon.onclick = function(){DeleteNote(createdNote.id)}; 
+    deleteIcon.onclick = function(){ DeleteNote(createdNote.id) };
+    const textBox = newNote.getElementsByTagName("textarea")[0];
+    textBox.onblur = function(){ UpdateNote(createdNote.id) }; 
 
     //append all other notes behind newest created, pushing it to top
     //do the same with updating a note but add if statemnt to check if same name as updated note
@@ -119,4 +121,11 @@ function DeleteNote(noteNum){
         localStorage.setItem("noteOrder", order);
         console.log("deleted " + noteNum);
     }
+}
+
+function UpdateNote(noteId){
+    const note = document.getElementById(noteId);
+    const text = note.getElementsByTagName('textarea')[0].value;
+    localStorage.setItem(noteId.slice(4), text);
+    console.log("saved " + noteId + " text");
 }
