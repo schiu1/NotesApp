@@ -119,6 +119,7 @@ function DeleteNote(noteNum){
             order = "";
         }
         localStorage.setItem("noteOrder", order);
+        localStorage.removeItem(noteNum);
         console.log("deleted " + noteNum);
     }
 }
@@ -126,6 +127,6 @@ function DeleteNote(noteNum){
 function UpdateNote(noteId){
     const note = document.getElementById(noteId);
     const text = note.getElementsByTagName('textarea')[0].value;
-    localStorage.setItem(noteId.slice(4), text);
+    localStorage.setItem(noteId, text);
     console.log("saved " + noteId + " text");
 }
