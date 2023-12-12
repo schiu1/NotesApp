@@ -25,6 +25,7 @@ if(localStorage.getItem("saved") == null){
     document.body.appendChild(createdNote);
 
     localStorage.setItem("noteOrder", "1");
+    localStorage.setItem(createdNote.id, "");
     console.log("created new");
 }
 else if(localStorage.getItem("saved") != null){
@@ -80,6 +81,7 @@ function AddNote(newId){
     document.body.appendChild(createdNote);
 
     //make changes for it to perform as intended
+    localStorage.setItem(createdNote.id, "");
     const newNote = document.getElementById(createdNote.id);
     const deleteIcon = newNote.getElementsByTagName("i")[0];
     deleteIcon.onclick = function(){ DeleteNote(createdNote.id) };
@@ -87,8 +89,6 @@ function AddNote(newId){
     textBox.onblur = function(){ UpdateNote(createdNote.id) }; 
 
     //append all other notes behind newest created, pushing it to top
-    //do the same with updating a note but add if statement to check if same name as updated note
-    //if it is, continue, so that it skips over it and doesn't move it's position
     const allNotes = document.getElementsByClassName("note");
     if (newId == undefined) {
         let counter = 0;
@@ -133,6 +133,15 @@ function DeleteNote(noteNum){
 function UpdateNote(noteId){
     const note = document.getElementById(noteId);
     const text = note.getElementsByTagName('textarea')[0].value;
-    localStorage.setItem(noteId, text);
-    console.log("saved " + noteId + " text");
+    if(localStorage.getItem(noteId) != text){
+        const allNotes = document.getElementsByClassName("note");
+        for(const element of allNotes){
+            if(element.id == noteId){
+                document.body.insertBefore(element, allNotes[0]);
+            }
+        }
+        localStorage.setItem(noteId, text);
+        console.log("saved " + noteId + " text");
+    }
+    
 }
