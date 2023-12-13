@@ -142,6 +142,13 @@ function UpdateNote(noteId){
         }
         localStorage.setItem(noteId, text);
         console.log("saved " + noteId + " text");
+        
+        let noteOrder = "";
+        for(let element of allNotes){
+            noteOrder = noteOrder + element.id.slice(4) + ",";
+        } 
+        noteOrder = noteOrder.slice(0, -1);
+        localStorage.setItem("noteOrder", noteOrder);    
     }
     
 }
