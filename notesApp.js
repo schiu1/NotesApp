@@ -70,6 +70,7 @@ function AddNote(newId){
         createdNote.id = "note" + (noteCount + 1);
         noteCount++;
         localStorage.setItem("noteCount", noteCount);
+        localStorage.setItem(createdNote.id, "");
     }
     else if (newId != undefined){
         createdNote.id = "note" + newId;
@@ -81,7 +82,6 @@ function AddNote(newId){
     document.body.appendChild(createdNote);
 
     //make changes for it to perform as intended
-    localStorage.setItem(createdNote.id, "");
     const newNote = document.getElementById(createdNote.id);
     const deleteIcon = newNote.getElementsByTagName("i")[0];
     deleteIcon.onclick = function(){ DeleteNote(createdNote.id) };
