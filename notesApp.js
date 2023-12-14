@@ -142,13 +142,34 @@ function UpdateNote(noteId){
         }
         localStorage.setItem(noteId, text);
         console.log("saved " + noteId + " text");
-        
+
         let noteOrder = "";
         for(let element of allNotes){
             noteOrder = noteOrder + element.id.slice(4) + ",";
         } 
         noteOrder = noteOrder.slice(0, -1);
         localStorage.setItem("noteOrder", noteOrder);    
+        
+        const months = ["January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"];
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", 
+        "Thursday", "Friday", "Saturday"];
+        const d = new Date();
+        const date = days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+        let time = "";
+        const hours = d.getHours();
+        if (hours > 12){
+            time = (hours - 12).toString() + ":" + d.getMinutes().toString() + "PM";
+        }
+        else if(hours == 12){
+            time = hours.toString() + ":" + d.getMinutes().toString() + "PM";
+        }
+        else if(hours == 0){
+            time = "12:" + d.getMinutes().toString() + "AM";
+        }
+        else{
+            time = hours.toString() + ":" + d.getMinutes().toString() + "AM";
+        }
+        console.log(date + " at " + time);
     }
-    
 }
