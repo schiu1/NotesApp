@@ -5,6 +5,11 @@ plus.addEventListener("click", function(){ AddNote(); });
 let noteCount = 0;
 if(localStorage.getItem("saved") == null){
     noteCount = 1;
+
+    const dateAndTime = document.createElement("div");
+    dateAndTime.classList.toggle("datetime");
+    dateAndTime.id = "dateAndTime";
+
     const trashIcon = document.createElement("i"); 
     trashIcon.classList.toggle("fa");
     trashIcon.classList.toggle("fa-trash");
@@ -20,6 +25,7 @@ if(localStorage.getItem("saved") == null){
     createdNote.classList.toggle("note");
     createdNote.id = "note1";
 
+    createdNote.appendChild(dateAndTime);
     createdNote.appendChild(trashIcon);
     createdNote.appendChild(textSpace);
     document.body.appendChild(createdNote);
@@ -54,6 +60,10 @@ function AddNote(newId){
         localStorage.setItem("saved", "true");
     }
     //create new note with unique id, which will append to end
+    const dateAndTime = document.createElement("div");
+    dateAndTime.classList.toggle("datetime");
+    dateAndTime.id = "dateAndTime";
+
     const trashIcon = document.createElement("i"); 
     trashIcon.classList.toggle("fa");
     trashIcon.classList.toggle("fa-trash");
@@ -77,6 +87,7 @@ function AddNote(newId){
     }
     console.log("added " + createdNote.id);
 
+    createdNote.appendChild(dateAndTime);
     createdNote.appendChild(trashIcon);
     createdNote.appendChild(textSpace);
     document.body.appendChild(createdNote);
