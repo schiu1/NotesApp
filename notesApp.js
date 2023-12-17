@@ -76,14 +76,19 @@ function AddNote(newId){
     
     const createdNote = document.createElement("div");
     createdNote.classList.toggle("note");
-    if(newId == undefined){
+
+    if(newId == undefined){ //if brand new note
         createdNote.id = "note" + (noteCount + 1);
         noteCount++;
         localStorage.setItem("noteCount", noteCount);
         localStorage.setItem(createdNote.id, "");
+        const newDateTime = GetDateTimeNow();
+        dateAndTime.innerHTML = newDateTime;
+        localStorage.setItem((createdNote.id + "DateTime"), newDateTime);
     }
-    else if (newId != undefined){
+    else if (newId != undefined){ //if adding back existing note from localstorage
         createdNote.id = "note" + newId;
+        dateAndTime.innerHTML = localStorage.getItem(createdNote.id + "DateTime");
     }
     console.log("added " + createdNote.id);
 
@@ -159,28 +164,31 @@ function UpdateNote(noteId){
             noteOrder = noteOrder + element.id.slice(4) + ",";
         } 
         noteOrder = noteOrder.slice(0, -1);
-        localStorage.setItem("noteOrder", noteOrder);    
-        
-        const months = ["January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December"];
-        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", 
-        "Thursday", "Friday", "Saturday"];
-        const d = new Date();
-        const date = days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-        let time = "";
-        const hours = d.getHours();
-        if (hours > 12){
-            time = (hours - 12).toString() + ":" + d.getMinutes().toString() + "PM";
-        }
-        else if(hours == 12){
-            time = hours.toString() + ":" + d.getMinutes().toString() + "PM";
-        }
-        else if(hours == 0){
-            time = "12:" + d.getMinutes().toString() + "AM";
-        }
-        else{
-            time = hours.toString() + ":" + d.getMinutes().toString() + "AM";
-        }
-        console.log(date + " at " + time);
+        localStorage.setItem("noteOrder", noteOrder);
+        console.log(GetDateTimeNow());    
     }
+}
+
+function GetDateTimeNow(){
+    const months = ["January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", 
+    "Thursday", "Friday", "Saturday"];
+    const d = new Date();
+    const date = days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    let time = "";
+    const hours = d.getHours();
+    if (hours > 12){
+        time = (hours - 12).toString() + ":" + d.getMinutes().toString() + "PM";
+    }
+    else if(hours == 12){
+        time = hours.toString() + ":" + d.getMinutes().toString() + "PM";
+    }
+    else if(hours == 0){
+        time = "12:" + d.getMinutes().toString() + "AM";
+    }
+    else{
+        time = hours.toString() + ":" + d.getMinutes().toString() + "AM";
+    }
+    return (date + " at " + time);
 }
