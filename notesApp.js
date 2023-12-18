@@ -142,6 +142,7 @@ function DeleteNote(noteNum){
         }
         localStorage.setItem("noteOrder", order);
         localStorage.removeItem(noteNum);
+        localStorage.removeItem(noteNum + "DateTime");
         console.log("deleted " + noteNum);
     }
 }
