@@ -165,7 +165,9 @@ function UpdateNote(noteId){
         } 
         noteOrder = noteOrder.slice(0, -1);
         localStorage.setItem("noteOrder", noteOrder);
-        console.log(GetDateTimeNow());    
+        const currDateTime = GetDateTimeNow(); 
+        note.getElementsByTagName('div')[0].innerHTML = currDateTime;
+        localStorage.setItem((noteId + "DateTime"), currDateTime);   
     }
 }
 
