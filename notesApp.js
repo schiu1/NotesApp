@@ -181,17 +181,21 @@ function GetDateTimeNow(){
     const date = days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     let time = "";
     const hours = d.getHours();
+    const minutes = d.getMinutes().toString();
+    if(minutes.length == 1){
+        minutes = "0" + minutes;
+    }
     if (hours > 12){
-        time = (hours - 12).toString() + ":" + d.getMinutes().toString() + "PM";
+        time = (hours - 12).toString() + ":" + minutes + "PM";
     }
     else if(hours == 12){
-        time = hours.toString() + ":" + d.getMinutes().toString() + "PM";
+        time = hours.toString() + ":" + minutes + "PM";
     }
     else if(hours == 0){
-        time = "12:" + d.getMinutes().toString() + "AM";
+        time = "12:" + minutes + "AM";
     }
     else{
-        time = hours.toString() + ":" + d.getMinutes().toString() + "AM";
+        time = hours.toString() + ":" + minutes + "AM";
     }
     return (date + " at " + time);
 }
