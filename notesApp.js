@@ -30,6 +30,12 @@ if(localStorage.getItem("saved") == null){
     createdNote.appendChild(textSpace);
     document.body.appendChild(createdNote);
 
+    const newNote = document.getElementById(createdNote.id);
+    const deleteIcon = newNote.getElementsByTagName("i")[0];
+    deleteIcon.onclick = function(){ DeleteNote(createdNote.id) };
+    const textBox = newNote.getElementsByTagName("textarea")[0];
+    textBox.onblur = function(){ UpdateNote(createdNote.id) }; 
+
     localStorage.setItem("noteOrder", "1");
     localStorage.setItem(createdNote.id, "");
     console.log("created new");
